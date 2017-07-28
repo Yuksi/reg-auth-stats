@@ -8,8 +8,11 @@ import java.time.LocalDateTime;
 /**
  * Created by Yuksi on 18.04.2017.
  */
-public class User extends AbstractEntity {
+
+
+public class User {
     /** used for registration */
+    long id;
     String login;
     String name;
     String surname;
@@ -20,6 +23,14 @@ public class User extends AbstractEntity {
     UserStatuses status;
     /** used for registration */
     String pswd;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getLogin() {
         return login;

@@ -2,15 +2,26 @@ package com.yuksi.entities;
 
 import com.yuksi.entities.enums.Providers;
 
+
 /**
  * Created by Yuksi on 18.04.2017.
  *
  * when new Account created - creation User with data from Account
  */
-public class Account extends AbstractEntity {
+public class Account {
+
+    long id;
     long userId;
     Providers networkName;
     String socialUserId;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public long getUserId() {
         return userId;
