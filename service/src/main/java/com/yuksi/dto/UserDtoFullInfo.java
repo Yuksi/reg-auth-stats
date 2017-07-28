@@ -1,25 +1,32 @@
-package com.yuksi.entities;
-
-import com.yuksi.entities.enums.Roles;
-import com.yuksi.entities.enums.UserStatuses;
+package com.yuksi.dto;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * Created by Yuksi on 18.04.2017.
+ * Created by Yuksi on 27.07.2017.
  */
-public class User extends AbstractEntity {
-    /** used for registration */
+public class UserDtoFullInfo {
+
+    long id;
     String login;
     String name;
     String surname;
     String email;
     LocalDateTime regDate;
     LocalDateTime changeDate;
-    Roles role;
-    UserStatuses status;
-    /** used for registration */
-    String pswd;
+    String role;
+    String status;
+    List<String> accounts = new ArrayList<>();
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getLogin() {
         return login;
@@ -69,43 +76,43 @@ public class User extends AbstractEntity {
         this.changeDate = changeDate;
     }
 
-    public Roles getRole() {
+    public String getRole() {
         return role;
     }
 
-    public void setRole(Roles role) {
+    public void setRole(String role) {
         this.role = role;
     }
 
-    public UserStatuses getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(UserStatuses status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
-    public String getPswd() {
-        return pswd;
+    public List<String> getAccounts() {
+        return accounts;
     }
 
-    public void setPswd(String pswd) {
-        this.pswd = pswd;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        User user = (User) o;
-
-        return login != null ? login.equals(user.login) : user.login == null;
-
+    public void setAccounts(List<String> accounts) {
+        this.accounts = accounts;
     }
 
     @Override
-    public int hashCode() {
-        return login != null ? login.hashCode() : 0;
+    public String toString() {
+        return "UserDtoFullInfo{" +
+                "id=" + id +
+                ", login='" + login + '\'' +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", email='" + email + '\'' +
+                ", regDate=" + regDate +
+                ", changeDate=" + changeDate +
+                ", role='" + role + '\'' +
+                ", status='" + status + '\'' +
+                ", accounts=" + accounts +
+                '}';
     }
 }
