@@ -22,7 +22,7 @@ public class User {
     Roles role;
     UserStatuses status;
     /** used for registration */
-    String pswd;
+    /*@JsonIgnore*/ String pswd;
 
     public long getId() {
         return id;
