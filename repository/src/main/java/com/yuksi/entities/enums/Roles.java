@@ -8,9 +8,13 @@ public enum Roles {
     ADMIN (1), //смотрит статистику, меняет статус юзера
     SUPER (2); //возможности админ + меняет роль юзера
 
-    int role;
+    private int role;
 
     Roles (int role) {
         this.role = role;
+    }
+
+    public int getRole() {
+        return role;
     }
 }

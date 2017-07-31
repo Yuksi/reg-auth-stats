@@ -7,9 +7,13 @@ public enum UserStatuses {
     ENABLED (0),
     BLOCKED (1);
 
-    int status;
+    private int status;
 
     UserStatuses(int status) {
         this.status = status;
+    }
+
+    public int getStatus() {
+        return status;
     }
 }

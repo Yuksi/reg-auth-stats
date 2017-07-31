@@ -1,17 +1,29 @@
 package com.yuksi.entities;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 /**
  * Created by Yuksi on 18.04.2017.
  */
 
+@Entity
+@Table(name="CHANGES_TOTAL")
 public class HardChange {
 
+    @Id
+    @Column(name="id_changing")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     long id;
+
+    @Column(name="id_to_change")
     long toChangeId;
+
+    @Column(name="id_who_changes")
     long whoChangesId;
-    LocalDateTime change_date = LocalDateTime.now();
+
+    @Column(name="change_date")
+    LocalDateTime changeDate = LocalDateTime.now();
 
     public long getId() {
         return id;
@@ -37,12 +49,12 @@ public class HardChange {
         this.whoChangesId = whoChangesId;
     }
 
-    public LocalDateTime getChange_date() {
-        return change_date;
+    public LocalDateTime getChangeDate() {
+        return changeDate;
     }
 
-    public void setChange_date(LocalDateTime change_date) {
-        this.change_date = change_date;
+    public void setChangeDate(LocalDateTime changeDate) {
+        this.changeDate = changeDate;
     }
 
     @Override
@@ -55,7 +67,7 @@ public class HardChange {
         if (id != that.id) return false;
         if (toChangeId != that.toChangeId) return false;
         if (whoChangesId != that.whoChangesId) return false;
-        return change_date != null ? change_date.equals(that.change_date) : that.change_date == null;
+        return changeDate != null ? changeDate.equals(that.changeDate) : that.changeDate == null;
 
     }
 
@@ -64,7 +76,7 @@ public class HardChange {
         int result = (int) (id ^ (id >>> 32));
         result = 31 * result + (int) (toChangeId ^ (toChangeId >>> 32));
         result = 31 * result + (int) (whoChangesId ^ (whoChangesId >>> 32));
-        result = 31 * result + (change_date != null ? change_date.hashCode() : 0);
+        result = 31 * result + (changeDate != null ? changeDate.hashCode() : 0);
         return result;
     }
 }

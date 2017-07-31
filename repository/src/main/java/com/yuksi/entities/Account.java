@@ -2,17 +2,31 @@ package com.yuksi.entities;
 
 import com.yuksi.entities.enums.Providers;
 
+import javax.persistence.*;
+
 
 /**
  * Created by Yuksi on 18.04.2017.
  *
  * when new Account created - creation User with data from Account
  */
+
+@Entity
+@Table(name="SOCIAL_ACCOUNTS")
 public class Account {
 
+    @Id
+    @Column(name="id_acc")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     long id;
+
+    @Column(name="user_id")
     long userId;
+
+    @Column(name="network")
     Providers networkName;
+
+    @Column(name="social_id")
     String socialUserId;
 
     public long getId() {

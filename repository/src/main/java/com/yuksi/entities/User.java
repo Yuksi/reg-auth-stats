@@ -3,26 +3,36 @@ package com.yuksi.entities;
 import com.yuksi.entities.enums.Roles;
 import com.yuksi.entities.enums.UserStatuses;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 /**
  * Created by Yuksi on 18.04.2017.
  */
 
-
+@Entity
+@Table(name="USERS")
 public class User {
     /** used for registration */
+    @Id
+    @Column(name="user_id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     long id;
+
     String login;
     String name;
     String surname;
     String email;
+
+    @Column(name="reg_date")
     LocalDateTime regDate;
+
+    @Column(name="change_date")
     LocalDateTime changeDate;
-    Roles role;
-    UserStatuses status;
+    int role;
+    int status;
     /** used for registration */
-    /*@JsonIgnore*/ String pswd;
+    String password;
 
     public long getId() {
         return id;
@@ -80,28 +90,28 @@ public class User {
         this.changeDate = changeDate;
     }
 
-    public Roles getRole() {
+    public int getRole() {
         return role;
     }
 
-    public void setRole(Roles role) {
+    public void setRole(int role) {
         this.role = role;
     }
 
-    public UserStatuses getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(UserStatuses status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 
     public String getPswd() {
-        return pswd;
+        return password;
     }
 
     public void setPswd(String pswd) {
-        this.pswd = pswd;
+        this.password = pswd;
     }
 
     @Override
