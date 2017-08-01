@@ -25,13 +25,18 @@ public class UserController {
         return "Hello";
     }
 
-    @RequestMapping(value= "/{login}", method = RequestMethod.GET)
-    public User userByLogin(@PathVariable String login) {
+    @RequestMapping(value= "/{id}", method = RequestMethod.GET)
+    public User userInfo(@PathVariable long id) {
+        return iUserService.findById(id);
+    }
+
+    @RequestMapping(value= "/search/login", method = RequestMethod.GET)
+    public User userByLogin(@RequestParam String login) {
         return iUserService.findByLogin(login);
     }
 
-    @RequestMapping(value= "/search/{name}", method = RequestMethod.GET)
-    public List<User> userByName(@PathVariable String name) {
+    @RequestMapping(value= "/search/name", method = RequestMethod.GET)
+    public List<User> userByName(@RequestParam String name) {
         return iUserService.findByName(name);
     }
 
@@ -46,19 +51,24 @@ public class UserController {
         return iUserService.createNew(login, name, surname, email, password);
     }
 
-    @RequestMapping(value = "/{login}", method = RequestMethod.PUT)
-    public User changingUserInfo(@RequestParam String login, String name,
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    public User changingUserInfo(@PathVariable long id, @RequestParam String name,
                               String surname, String email, String password) {
-        return iUserService.changingInfo(login, name, surname, email, password);
+        return iUserService.changingInfo(id, name, surname, email, password);
     }
 
-    @RequestMapping(value = "/changerole/{login}", method = RequestMethod.PUT)
-    public User changingRole(@PathVariable String login, @RequestParam String role) {
-        return iUserService.changingRole(login, role);
+    @RequestMapping(value = "/changerole/{id}", method = RequestMethod.PUT)
+    public User changingRole(@PathVariable long id, @RequestParam String role) {
+        return iUserService.changingRole(id, role);
     }
 
-    @RequestMapping(value = "/changestatus/{login}", method = RequestMethod.PUT)
-    public User changingStatus(@PathVariable String login, @RequestParam String status) {
-        return iUserService.changingStatus(login, status);
+    @RequestMapping(value = "/changestatus/{id}", method = RequestMethod.PUT)
+    public User changingStatus(@PathVariable long id, @RequestParam String status) {
+        return iUserService.changingStatus(id, status);
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public void deleteByUser(@PathVariable long id, @RequestParam String password) {
+        iUserService.deleteByUser(id, password);
     }
 }

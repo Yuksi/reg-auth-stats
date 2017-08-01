@@ -9,6 +9,8 @@ import java.util.List;
  */
 public interface IUserService {
 
+    User findById(long id);
+
     User findByLogin(String login);
 
     List<User> findByName(String name);
@@ -17,9 +19,11 @@ public interface IUserService {
 
     User createNew(String login, String name, String surname, String email, String password);
 
-    User changingInfo(String login, String name, String surname, String email, String password);
+    User changingInfo(long id, String name, String surname, String email, String password);
 
-    User changingStatus(String login, String status);
+    User changingStatus(long id, String status);
 
-    User changingRole(String login, String role);
+    User changingRole(long id, String role);
+
+    boolean deleteByUser(long id, String password);
 }

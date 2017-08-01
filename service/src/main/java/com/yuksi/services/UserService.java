@@ -20,6 +20,12 @@ public class UserService implements IUserService {
     @Autowired
     IUserRepository iUserRepository;
 
+    @Override
+    public User findById(long id) {
+        return iUserRepository.findOne(id);
+    }
+
+    @Override
     public User findByLogin(String login) {
         return iUserRepository.findByLogin(login);
     }
@@ -48,14 +54,12 @@ public class UserService implements IUserService {
         user.setRole(Roles.USER.getRole());
         user.setStatus(UserStatuses.ENABLED.getStatus());
         user.setRegDate(LocalDateTime.now());
-        iUserRepository.save(user);
-
-        return user;
+        return iUserRepository.save(user);
     }
 
     @Override
-    public User changingInfo(String login, String name, String surname, String email, String password) {
-        User user = iUserRepository.findByLogin(login);
+    public User changingInfo(long id, String name, String surname, String email, String password) {
+        User user = iUserRepository.findOne(id);
         if (user == null) {
             return null;
         }
@@ -64,32 +68,38 @@ public class UserService implements IUserService {
         user.setEmail(email);
         user.setPswd(password);
         user.setChangeDate(LocalDateTime.now());
-        iUserRepository.save(user);
-        return user;
+        return iUserRepository.save(user);
     }
 
     @Override
-    public User changingStatus(String login, String status) {
-        User user = iUserRepository.findByLogin(login);
+    public User changingStatus(long id, String status) {
+        User user = iUserRepository.findOne(id);
         if (user == null) {
             return null;
         }
         user.setStatus(UserStatuses.valueOf(status).getStatus());
         user.setChangeDate(LocalDateTime.now());
-        iUserRepository.save(user);
-        return user;
+        return iUserRepository.save(user);
     }
 
     @Override
-    public User changingRole(String login, String role) {
-        User user = iUserRepository.findByLogin(login);
+    public User changingRole(long id, String role) {
+        User user = iUserRepository.findOne(id);
         if (user == null) {
             return null;
         }
         user.setRole(Roles.valueOf(role).getRole());
         user.setChangeDate(LocalDateTime.now());
-        iUserRepository.save(user);
-        return user;
+        return iUserRepository.saveAndFlush(user);
     }
 
+    @Override
+    public boolean deleteByUser(long id, String password) {
+        User user = iUserRepository.findOne(id);
+        if (user != null && user.getPswd().equals(password)) {
+            iUserRepository.delete(id);
+            return true;
+        }
+        return false;
+    }
 }

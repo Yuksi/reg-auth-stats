@@ -1,8 +1,5 @@
 package com.yuksi.entities;
 
-import com.yuksi.entities.enums.Roles;
-import com.yuksi.entities.enums.UserStatuses;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
