@@ -2,8 +2,6 @@ package com.yuksi.boot;
 
 import javax.servlet.Filter;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -27,18 +25,10 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.filter.CompositeFilter;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintStream;
-import java.security.Principal;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Yuksi on 07.08.2017.
@@ -46,52 +36,12 @@ import java.util.Map;
 
 @SpringBootApplication(scanBasePackages={"com.yuksi"})
 @EnableOAuth2Client
-@RestController
 @EnableAuthorizationServer
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
 public class SocialApp extends WebSecurityConfigurerAdapter {
 
-    private static final Logger LOGGER = LogManager.getLogger(SocialApp.class.getName());
-
     @Autowired
     OAuth2ClientContext oauth2ClientContext;
-
-    /*
-    @RequestMapping({ "/user", "/me" })
-    public Map<String, String> user(Principal principal) {
-        Map<String, String> map = new LinkedHashMap<>();
-        map.put("name", principal.getName());
-
-        LOGGER.info("principal.getName = " + principal.getName());
-        LOGGER.info("principal = " + principal);
-
-        try {
-            System.setErr(new PrintStream(new File("log.txt")));
-            System.err.println("principal.getName = " + principal.getName());
-            System.err.println("principal = " + principal);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        return map;
-    }
-    */
-
-    @RequestMapping({ "/user", "/me" })
-    public Principal user(Principal principal) {
-        LOGGER.info("principal.getName = " + principal.getName());
-        LOGGER.info("principal = " + principal);
-
-        try {
-            System.setErr(new PrintStream(new File("log.txt")));
-            System.err.println("principal.getName = " + principal.getName());
-            System.err.println("principal = " + principal);
-            System.err.println();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        return principal;
-    }
 
     public static void main(String[] args) {
         SpringApplication.run(SocialApp.class, args);
