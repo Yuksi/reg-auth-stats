@@ -41,7 +41,7 @@ import java.util.List;
 public class SocialApp extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    OAuth2ClientContext oauth2ClientContext;
+    private OAuth2ClientContext oauth2ClientContext;
 
     public static void main(String[] args) {
         SpringApplication.run(SocialApp.class, args);
