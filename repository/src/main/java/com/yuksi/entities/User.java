@@ -1,12 +1,14 @@
 package com.yuksi.entities;
 
+import org.springframework.stereotype.Component;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 /**
  * Created by Yuksi on 18.04.2017.
  */
-
+@Component
 @Entity
 @Table(name="USERS")
 public class User {
@@ -22,7 +24,7 @@ public class User {
     String email;
 
     @Column(name="reg_date")
-    LocalDateTime regDate;
+    LocalDateTime regDate = LocalDateTime.now();
 
     @Column(name="change_date")
     LocalDateTime changeDate;
