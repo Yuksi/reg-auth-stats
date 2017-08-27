@@ -37,5 +37,3 @@ CREATE TABLE CHANGES_TOTAL
 	CONSTRAINT to_change_user_id_ref FOREIGN KEY(id_to_change) REFERENCES USERS(user_id),
 	CONSTRAINT who_change_user_id_ref FOREIGN KEY(id_who_changes) REFERENCES USERS(user_id)
 );
-
-commit;
