@@ -24,7 +24,7 @@ public class Account {
     long userId;
 
     @Column(name="network")
-    Providers networkName;
+    int networkName;
 
     @Column(name="social_id")
     String socialUserId;
@@ -45,11 +45,11 @@ public class Account {
         this.userId = userId;
     }
 
-    public Providers getNetworkName() {
+    public int getNetworkName() {
         return networkName;
     }
 
-    public void setNetworkName(Providers networkName) {
+    public void setNetworkName(int networkName) {
         this.networkName = networkName;
     }
 
@@ -68,6 +68,7 @@ public class Account {
 
         Account account = (Account) o;
 
+        if (userId != account.userId) return false;
         if (networkName != account.networkName) return false;
         return socialUserId != null ? socialUserId.equals(account.socialUserId) : account.socialUserId == null;
 
@@ -75,7 +76,8 @@ public class Account {
 
     @Override
     public int hashCode() {
-        int result = networkName != null ? networkName.hashCode() : 0;
+        int result = (int) (userId ^ (userId >>> 32));
+        result = 31 * result + networkName;
         result = 31 * result + (socialUserId != null ? socialUserId.hashCode() : 0);
         return result;
     }

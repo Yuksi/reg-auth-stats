@@ -12,4 +12,8 @@ public enum Providers {
     Providers (int provider) {
         this.provider = provider;
     }
+
+    public int getProvider() {
+        return provider;
+    }
 }

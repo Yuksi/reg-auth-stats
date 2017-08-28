@@ -3,12 +3,15 @@ package com.yuksi.controllers;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
+import java.lang.reflect.Field;
 import java.security.Principal;
 
 
@@ -25,17 +28,9 @@ public class SignController{
     public Principal user(Principal principal) {
         LOGGER.info("principal.getName = " + principal.getName());
         LOGGER.info("principal = " + principal);
-
-        try {
-            System.setErr(new PrintStream(new File("log.txt")));
-            System.err.println("principal.getName = " + principal.getName());
-            System.err.println("principal = " + principal);
-            System.err.println();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
         return principal;
     }
+
 
     /*
     @RequestMapping({ "/user", "/me" })
@@ -45,14 +40,6 @@ public class SignController{
 
         LOGGER.info("principal.getName = " + principal.getName());
         LOGGER.info("principal = " + principal);
-
-        try {
-            System.setErr(new PrintStream(new File("log.txt")));
-            System.err.println("principal.getName = " + principal.getName());
-            System.err.println("principal = " + principal);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
 
         return map;
     }
