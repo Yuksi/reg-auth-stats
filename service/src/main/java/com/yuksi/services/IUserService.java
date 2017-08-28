@@ -1,6 +1,8 @@
 package com.yuksi.services;
 
 import com.yuksi.entities.User;
+import com.yuksi.exceptions.UsernameAlreadyInUseException;
+
 import java.util.List;
 
 
@@ -17,7 +19,7 @@ public interface IUserService {
 
     List<User> findAll();
 
-    User createNew(String login, String name, String surname, String email, String password);
+    User createNew(String login, String name, String surname, String email, String password) throws UsernameAlreadyInUseException;
 
     User changingInfo(long id, String name, String surname, String email, String password);
 

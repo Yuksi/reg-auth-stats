@@ -1,7 +1,8 @@
 package com.yuksi.controllers;
 
-import com.yuksi.boot.Application;
+import com.yuksi.controllers.security.Application;
 import com.yuksi.entities.User;
+import com.yuksi.exceptions.UsernameAlreadyInUseException;
 import com.yuksi.services.IUserService;
 import org.junit.After;
 import org.junit.Before;
@@ -41,7 +42,11 @@ public class UserControllerIntegrationTest {
         user.setEmail("testuser@ukr.net");
         user.setPswd("testuser");
         user.setRegDate(LocalDateTime.now());
-        iUserService.createNew("testuser", "Testuser", "TestUser", "testuser@ukr.net", "testuser");
+        try {
+            iUserService.createNew("testuser", "Testuser", "TestUser", "testuser@ukr.net", "testuser");
+        } catch (UsernameAlreadyInUseException e) {
+            e.printStackTrace();
+        }
     }
 
     @After

@@ -2,6 +2,7 @@ package com.yuksi.services;
 
 import com.yuksi.entities.enums.Roles;
 import com.yuksi.entities.enums.UserStatuses;
+import com.yuksi.exceptions.UsernameAlreadyInUseException;
 import com.yuksi.repositories.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,9 +42,9 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public User createNew(String login, String name, String surname, String email, String password) {
+    public User createNew(String login, String name, String surname, String email, String password) throws UsernameAlreadyInUseException {
         if (iUserRepository.findByLogin(login) != null) {
-            return null;
+            throw new UsernameAlreadyInUseException(login);
         }
         User user = new User();
         user.setLogin(login);

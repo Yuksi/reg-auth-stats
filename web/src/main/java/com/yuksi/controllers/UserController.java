@@ -1,7 +1,7 @@
 package com.yuksi.controllers;
 
-import com.yuksi.dto.UserDtoFullInfo;
 import com.yuksi.entities.User;
+import com.yuksi.exceptions.UsernameAlreadyInUseException;
 import com.yuksi.services.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -48,12 +48,18 @@ public class UserController {
     @RequestMapping(value = "/new", method = RequestMethod.POST)
     public User createNewUser(@RequestParam String login, String name,
                               String surname, String email, String password) {
-        return iUserService.createNew(login, name, surname, email, password);
+        User user = null;
+        try {
+            user = iUserService.createNew(login, name, surname, email, password);
+        } catch (UsernameAlreadyInUseException e) {
+            e.printStackTrace();
+        }
+        return user;
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public User changingUserInfo(@PathVariable long id, @RequestParam String name,
-                              String surname, String email, String password) {
+                                 String surname, String email, String password) {
         return iUserService.changingInfo(id, name, surname, email, password);
     }
 
